@@ -114,9 +114,7 @@ class RawQuerySetPaginator(DefaultPaginator):
         rows_returned = top - bottom
         starting_at = bottom
         database_vendor = self.connection.vendor
-        if database_vendor == 'mysql' or database_vendor == 'sqlite':
-            query_with_limit = '%s LIMIT %s,%s' % (self.raw_query_set.raw_query,starting_at,rows_returned)
-        elif database_vendor == 'postgresql':
+        if database_vendor in ('mysql','postgresql','sqlite'):
             query_with_limit = '%s LIMIT %s OFFSET %s' % (self.raw_query_set.raw_query,rows_returned,starting_at)
         else:
             raise DatabaseNotSupportedException('%s is not supported by RawQuerySetPaginator' % database_vendor)
