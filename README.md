@@ -9,7 +9,9 @@ Put the paginator.py somewhere in your project folder and import it.  DO NOT cop
 Example usage:
 
 from paginator import Paginator
+
 raw_query_set = some_model.objects.raw("SELECT * FROM some_model")
+
 Paginator(raw_query_set,50)
 
 You can also use this Paginator to paginate lists and querysets.  It detects the RawQuerySet
@@ -18,3 +20,6 @@ and calls RawQuerySetPaginator, but uses the default Django paginator otherwise.
 In my tests, I'm getting up to 50% performance gains using this, mainly when paginating
 a large complex query.  Don't bother using this for simple queries with a few pages,
 stick to the default paginator and cast the RawQuerySet to a list.
+
+Tested with Django 1.4.10 and Python 2.7, but should work with all versions after 1.4.
+Not tested with Python 3.
