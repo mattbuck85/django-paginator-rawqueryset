@@ -28,8 +28,8 @@ class RawQuerySetPaginator(DefaultPaginator):
         number = self.validate_number(number)
         offset = (number -1 ) * self.per_page
         limit = self.per_page
-        if limit + self.orphans >= self.count:
-            limit = self.count
+        if offset + limit + self.orphans >= self.count:
+            limit = self.count - offset
         database_vendor = self.connection.vendor
         if database_vendor in ('mysql','postgresql','sqlite'):
             query_with_limit = '%s LIMIT %s OFFSET %s' % (self.raw_query_set.raw_query,limit,offset)
