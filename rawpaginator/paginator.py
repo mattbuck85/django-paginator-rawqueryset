@@ -1,8 +1,5 @@
-from math import ceil
-
 from django.core.paginator import Page, Paginator as DefaultPaginator
 from django.db.models.query import RawQuerySet
-
 from django.db import connections
 
 class DatabaseNotSupportedException(Exception):
