@@ -34,8 +34,8 @@ class RawQuerySetPaginator(DefaultPaginator):
             raise DatabaseNotSupportedException('%s is not supported by RawQuerySetPaginator' % database_vendor)
         return Page(list(self.raw_query_set.model.objects.raw(query_with_limit,self.raw_query_set.params)), number, self)
 
-def Paginator(object_list,per_page,orphans=0,allow_empty_page_first=True):
+def Paginator(object_list,per_page,orphans=0,allow_empty_first_page=True):
     if isinstance(object_list,RawQuerySet):
-        return RawQuerySetPaginator(object_list,per_page,orphans,allow_empty_page_first)
+        return RawQuerySetPaginator(object_list,per_page,orphans,allow_empty_first_page)
     else:
-        return DefaultPaginator(object_list,per_page,orphans,allow_empty_page_first)
+        return DefaultPaginator(object_list,per_page,orphans,allow_empty_first_page)
