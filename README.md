@@ -2,7 +2,7 @@ django-paginator-rawqueryset
 ============================
 
 A django paginator for RawQuerySet.  This allows you to pass a RawQuerySet into a custom paginator, resulting in more efficient pagination.
-Supports mysql, sqlite, and postgresql.  Oracle is not supported.
+Supports mysql, sqlite, and postgresql.  Oracle 12.1 and Firebird support needs testing.
 
 Installation
 ============
