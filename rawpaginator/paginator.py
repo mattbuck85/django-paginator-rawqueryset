@@ -52,7 +52,7 @@ class RawQuerySetPaginator(DefaultPaginator):
         return '''SELECT FIRST %s SKIP %s * 
                 FROM (%s) as sub_query_for_pagination'''  % (limit, offset, self.raw_query_set.raw_query)
 
-    def page(self,number):
+    def page(self, number):
 
         number = self.validate_number(number)
         offset = (number - 1 ) * self.per_page
