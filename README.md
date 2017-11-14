@@ -21,7 +21,7 @@ if you want a Paginator that can work with querysets, lists, and rawquerysets, d
 ```python
    from rawpaginator.paginator import Paginator
    raw_qs = some_model.objects.raw('''SELECT * FROM some_model''')
-   p = Paginator(raw_qs,50)
+   p = Paginator(raw_qs, 50)
    p.page(1)
 ```
 
@@ -30,7 +30,7 @@ or if you just want the RawQuerySetPaginator, you can do this:
 ```python
    from rawpaginator.paginator import RawQuerySetPaginator
    raw_qs = some_model.objects.raw('''SELECT * FROM some_model''')
-   p = RawQuerySetPaginator(raw_qs,50)
+   p = RawQuerySetPaginator(raw_qs, 50)
    p.page(1)
 ```
 In my tests, I'm getting up to 50% performance gains using this, mainly when paginating
