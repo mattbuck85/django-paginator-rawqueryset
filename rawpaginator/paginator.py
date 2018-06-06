@@ -44,6 +44,7 @@ class RawQuerySetPaginator(DefaultPaginator):
         major_version, minor_version = self.connection.oracle_version[0:2]
         if major_version < 12 or (major_version == 12 and minor_version < 1):
             raise DatabaseNotSupportedException('Oracle version must be 12.1 or higher')
+            
         return """SELECT * FROM (%s) as sub_query_for_pagination 
                   OFFSET %s ROWS FETCH NEXT %s ROWS ONLY""" % (self.raw_query_set.raw_query, offset, limit)
 
@@ -63,8 +64,9 @@ class RawQuerySetPaginator(DefaultPaginator):
             query_with_limit = getattr(self, '%s_getquery' % database_vendor)(limit, offset)
         except AttributeError:
             raise DatabaseNotSupportedException('%s is not supported by RawQuerySetPaginator' % database_vendor)
-
-        return Page(list(self.raw_query_set.model.objects.raw(query_with_limit, self.raw_query_set.params)), number, self)
+        
+        data = list(self.raw_query_set.model.objects.raw(query_with_limit, self.raw_query_set.params))
+        return Page(data, number, self)
 
 def Paginator(*args, **kwargs):
     if isinstance(object_list, RawQuerySet):
