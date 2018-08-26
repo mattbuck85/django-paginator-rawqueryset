@@ -46,11 +46,13 @@ class RawQuerySetPaginator(DefaultPaginator):
             raise DatabaseNotSupportedException('Oracle version must be 12.1 or higher')
             
         return """SELECT * FROM (%s) as sub_query_for_pagination 
-                  OFFSET %s ROWS FETCH NEXT %s ROWS ONLY""" % (self.raw_query_set.raw_query, offset, limit)
+                  OFFSET %s ROWS FETCH NEXT %s ROWS ONLY
+               """ % (self.raw_query_set.raw_query, offset, limit)
 
     def firebird_getquery(self, limit, offset):##TODO:TESTING
         return """SELECT FIRST %s SKIP %s * 
-                FROM (%s) as sub_query_for_pagination"""  % (limit, offset, self.raw_query_set.raw_query)
+                FROM (%s) as sub_query_for_pagination
+               """  % (limit, offset, self.raw_query_set.raw_query)
 
     def page(self, number):
         number = self.validate_number(number)
@@ -58,8 +60,8 @@ class RawQuerySetPaginator(DefaultPaginator):
         limit = self.per_page
         if offset + limit + self.orphans >= self.count:
             limit = self.count - offset
+            
         database_vendor = self.connection.vendor
-
         try:
             query_with_limit = getattr(self, '%s_getquery' % database_vendor)(limit, offset)
         except AttributeError:
