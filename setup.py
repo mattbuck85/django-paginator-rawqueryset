@@ -9,7 +9,7 @@ setup(name='django-paginator-rawqueryset',
       version=__version__,
       description=description,
       author='Matt Buck',
-      author_email='seamusmb@gmail.com',
+      author_email='matt@mblance.com',
       url='https://github.com/seamusmb/django-paginator-rawqueryset',
       classifiers=[
         "Development Status :: 4 - Beta",
