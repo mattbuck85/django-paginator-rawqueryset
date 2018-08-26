@@ -37,4 +37,4 @@ In my tests, I'm getting up to 50% performance gains using this, mainly when pag
 a large complex query.  Don't bother using this for simple queries with a few pages,
 stick to the default paginator and cast the RawQuerySet to a list.
 
-Tested with the latest Django and Python.
+Tested with Django 2 and Python 3
