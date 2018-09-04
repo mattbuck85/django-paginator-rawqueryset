@@ -70,8 +70,9 @@ class RawQuerySetPaginator(DefaultPaginator):
         data = list(self.raw_query_set.model.objects.raw(query_with_limit, self.raw_query_set.params))
         return Page(data, number, self)
 
-def Paginator(*args, **kwargs):
-    if isinstance(object_list, RawQuerySet):
-        return RawQuerySetPaginator(*args, **kwargs)
-    else:
-        return DefaultPaginator(*args, **kwargs)
+
+class Paginator(object):
+    def __new__(cls, object_list, per_page, *args, **kwargs):
+        cls = (RawQuerySetPaginator if isinstance(object_list, RawQuerySet) else DefaultPaginator)
+        instance = cls(object_list, per_page, *args, **kwargs)
+        return instance
