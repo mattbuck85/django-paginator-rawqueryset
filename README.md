@@ -16,7 +16,7 @@ Add 'rawpaginator' to your INSTALLED_APPS in settings.py
 Usage
 =====
 
-if you want a Paginator that can work with querysets, lists, and rawquerysets, do this:
+if you want a Paginator that can work with querysets, lists, and rawquerysets, use the rawpaginator.paginator.Paginator wrapper class:
 
 ```python
    from rawpaginator.paginator import Paginator
@@ -24,9 +24,7 @@ if you want a Paginator that can work with querysets, lists, and rawquerysets, d
    p = Paginator(raw_qs, 50)
    p.page(1)
 ```
-
-or if you just want the RawQuerySetPaginator, you can do this:
-
+It's also possible to import the RawQuerysetPaginator, if you don't trust the wrapper.  However, it should work for all use cases:
 ```python
    from rawpaginator.paginator import RawQuerySetPaginator
    raw_qs = some_model.objects.raw("""SELECT * FROM some_model""")
